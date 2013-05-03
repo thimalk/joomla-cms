@@ -32,14 +32,16 @@ class JFormFieldOrdering extends JFormField
 	 * @return  string	The field input markup.
 	 * @since   1.6
 	 */
-	protected function getInput()
+	$select='';
+	$from='';
+	$where='';
+	$id='';
+	
+	protected function getOrder($select,$from,$where,$id)
 	{
 		$html = array();
 		$attr = '';
-		$select='';
-		$form='';
-		$where='';
-		$id='';
+		
 
 		// Initialize some field attributes.
 		$attr .= $this->element['class'] ? ' class="'.(string) $this->element['class'].'"' : '';
