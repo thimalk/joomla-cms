@@ -476,6 +476,25 @@ abstract class JHtmlBehavior
 		}
 		self::$loaded[__METHOD__] = true;
 	}
+	
+	public static function oclock()
+	{
+		// Only load once
+		if (isset(self::$loaded[__METHOD__]))
+		{
+			return;
+		}
+
+		$document = JFactory::getDocument();
+		$tag = JFactory::getLanguage()->getTag();
+
+		JHtml::_('stylesheet', 'system/oclock.css', array(' title' => JText::_('JLIB_HTML_BEHAVIOR_GREEN'), ' media' => 'all'), true);
+		JHtml::_('script', $tag . '/jquery-ui-timepicker-addon.js', false, true);
+		JHtml::_('script', $tag . '/jquery-ui-sliderAccess.js', false, true);
+
+		
+		self::$loaded[__METHOD__] = true;
+	}
 
 	/**
 	 * Add unobtrusive javascript support for a color picker.
