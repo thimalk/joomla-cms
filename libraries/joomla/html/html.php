@@ -922,6 +922,43 @@ abstract class JHtml
 				. ' /><input type="hidden" name="' . $name . '" id="' . $id . '" value="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '" />';
 		}
 	}
+	
+	public static function oclock($value, $name, $id, $format = 'HH:mm', $attribs = null)
+	{
+		static $done;
+
+		if ($done === null)
+		{
+			$done = array();
+		}
+
+		
+		if (is_array($attribs))
+		{
+			$attribs = JArrayHelper::toString($attribs);
+		}
+
+		
+			// Load the calendar behavior
+			self::_('behavior.oclock');
+			//self::_('behavior.tooltip');
+
+			// Only display the triggers once for each control.
+			
+				$document = JFactory::getDocument();
+				$document
+					->addScriptDeclaration(
+					
+				'$("#'.$id.'").datetimepicker({
+					timeFormat: "'.$format.'"
+				 });'
+				);
+				$done[] = $id;
+			
+			return '<div class="input-append"><input type="text" name="' . $name . '" id="' . $id . '" value="" ' . $attribs . ' /></div>';
+
+		
+	}
 	/**
 	 * Add a directory where JHtml should search for helpers. You may
 	 * either pass a string or an array of directories.
